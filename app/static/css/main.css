@@ -1,0 +1,8 @@
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import FacebookIcon from '@mui/icons-material/Facebook';
+body {
+    margin: 0;
+    background-color: 'red';
+    font-family: sans-serif;
+}
+

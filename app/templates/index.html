@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+    <h1 class="mt-5">About Detect Signs</h1>
+    <p>Welcome to Detect Signs, a web application designed to help you identify and classify various traffic signs using
+        advanced machine learning technology.</p>
+
+    <h2>How to Use</h2>
+    <p>Using Detect Signs is straightforward:</p>
+    <ol>
+        <li>Click on the "<a href="{{ url_for('file_upload') }}">Detect Signs</a>" link in the menu above.</li>
+        <li>On the detection page, click the "Upload Image" button.</li>
+        <li>Select an image file from your device that contains a visible traffic sign.</li>
+        <li>Click the "Upload" button to submit the image.</li>
+        <li>Our advanced model will analyze the image and provide a prediction of the traffic sign's meaning.</li>
+    </ol>
+
+    <h2>Important Notes</h2>
+    <p>If you would like to know more about model training and some useful insight then please visit this link <a
+            href="{{ url_for('training_flow') }}">Model Insight</a></p>
+    <p>Please keep the following in mind:</p>
+    <ul>
+        <li>Ensure the uploaded image contains a clearly visible traffic sign.</li>
+        <li>The accuracy of predictions may vary based on factors such as image quality and lighting conditions.</li>
+        <li>The supported traffic sign categories are based on the data used for model training.</li>
+    </ul>
+
+    <h2>Traffic Sign Categories</h2>
+    <p>Here is a list of traffic sign categories that our model can predict:</p>
+
+    <div class="col-6">
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <tr>
+                <th>Class ID</th>
+                <th>Sign Name</th>
+            </tr>
+            {% for class_id, sign_name in classe_labels.items() %}
+            <tr>
+                <td>{{ class_id }}</td>
+                <td>{{ sign_name }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock content %}

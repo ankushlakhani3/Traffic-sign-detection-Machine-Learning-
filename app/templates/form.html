@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="col-12 mt-5">
+<!--        <form action="/success" method="post" enctype="multipart/form-data" class="form">-->
+<!--            <div>-->
+<!--                <label for="formFileLg" class="form-label">Upload Image File Here:</label>-->
+<!--                <input class="form-control form-control-lg" id="formFileLg" type="file" name="file">-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-outline-primary">-->
+<!--                &lt;!&ndash;                <input type="submit" value="Upload">&ndash;&gt;-->
+<!--                Upload-->
+<!--            </button>-->
+<!--        </form>-->
+
+        <form action="/success" method="post" enctype="multipart/form-data" class="form d-flex justify-content-around align-items-baseline col-10 offset-1">
+            <div class="row">
+                <input class="form-control form-control-sm" id="formFileLg" type="file" name="file">
+            </div>
+            <button type="submit" class="btn btn-outline-primary btn-sm col-3">Upload</button>
+        </form>
+        <!-- Remove the container if you want to extend the Footer to full width. -->
+
+        <div class="col-12 text-center mt-5">
+            <img src="{{filepath}}" class="img-fluid mt-3" alt="image :)">
+            <p class="p-3 m-3">Model Prediction: {{filename}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+

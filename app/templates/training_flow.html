@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+
+    <h1>Training and Testing</h1>
+    <p>Welcome to the Model Demo, where we'll walk you through the steps of training and testing our traffic sign
+        recognition model.</p>
+
+    <h2>Step 1: Training</h2>
+    <p>We start by training our Convolutional Neural Network (CNN) using a labeled dataset of traffic sign images. The
+        model consists of several layers, each with different parameters:</p>
+
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Layer Type</th>
+            <th>Parameters</th>
+            <th>Activation</th>
+            <th>Use and Sequence</th>
+        </tr>
+        <tr>
+            <td>Convolutional</td>
+            <td>Filters: 32, Kernel Size: (5, 5)</td>
+            <td>ReLU</td>
+            <td>Extracts important features from input images. Convolutional layers are essential for detecting edges,
+                shapes, and textures in the images. Placing them early captures fundamental patterns.
+            </td>
+        </tr>
+        <tr>
+            <td>Convolutional</td>
+            <td>Filters: 32, Kernel Size: (5, 5)</td>
+            <td>ReLU</td>
+            <td>Further captures complex patterns and details. By adding more convolutional layers, the model learns
+                hierarchical features, allowing it to capture more intricate and abstract aspects of the traffic signs.
+            </td>
+        </tr>
+        <tr>
+            <td>MaxPooling</td>
+            <td>Pool Size: (2, 2)</td>
+            <td>N/A</td>
+            <td>Reduces spatial dimensions and retains important features. MaxPooling layers downsample the feature
+                maps, reducing computation and focusing on the most important features, aiding in spatial invariance.
+            </td>
+        </tr>
+        <tr>
+            <td>Dropout</td>
+            <td>Rate: 0.25</td>
+            <td>N/A</td>
+            <td>Helps prevent overfitting by randomly deactivating neurons. Dropout layers introduce randomness during
+                training, which prevents the network from relying too heavily on any specific neurons, improving
+                generalization.
+            </td>
+        </tr>
+        <tr>
+            <td>Convolutional</td>
+            <td>Filters: 64, Kernel Size: (3, 3)</td>
+            <td>ReLU</td>
+            <td>Extracts more intricate features. Adding more convolutional layers with smaller kernels allows the model
+                to capture even finer details and nuances present in the traffic signs.
+            </td>
+        </tr>
+        <tr>
+            <td>Convolutional</td>
+            <td>Filters: 64, Kernel Size: (3, 3)</td>
+            <td>ReLU</td>
+            <td>Continues to capture fine patterns. Additional convolutional layers further refine the learned features,
+                helping the model distinguish between subtle variations in traffic sign appearances.
+            </td>
+        </tr>
+        <tr>
+            <td>MaxPooling</td>
+            <td>Pool Size: (2, 2)</td>
+            <td>N/A</td>
+            <td>Further reduces dimensions and retains important information. Another max-pooling layer reduces the
+                feature map dimensions while preserving the most relevant features, enhancing the model's efficiency and
+                invariance.
+            </td>
+        </tr>
+        <tr>
+            <td>Dropout</td>
+            <td>Rate: 0.25</td>
+            <td>N/A</td>
+            <td>Continues preventing overfitting. Additional dropout helps prevent overfitting as the model learns more
+                complex features from the data.
+            </td>
+        </tr>
+        <tr>
+            <td>Flatten</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>Converts 2D features into 1D for fully connected layers. The flatten layer reshapes the feature maps
+                into a vector format that can be fed into the subsequent fully connected layers.
+            </td>
+        </tr>
+        <tr>
+            <td>Fully Connected</td>
+            <td>Units: 256</td>
+            <td>ReLU</td>
+            <td>Processes features and prepares for output. Fully connected layers interpret the high-level features and
+                patterns learned by the convolutional layers and prepare them for classification.
+            </td>
+        </tr>
+        <tr>
+            <td>Dropout</td>
+            <td>Rate: 0.5</td>
+            <td>N/A</td>
+            <td>Final step in preventing overfitting. Additional dropout in the fully connected layers reduces the risk
+                of overfitting in the final stages of processing.
+            </td>
+        </tr>
+        <tr>
+            <td>Fully Connected</td>
+            <td>Units: 43</td>
+            <td>Softmax</td>
+            <td>Generates class probabilities for traffic sign prediction. The final fully connected layer uses softmax
+                activation to provide probabilities for each class, enabling the model to make accurate predictions.
+            </td>
+        </tr>
+    </table>
+
+    <h2>Step 2: Efficient Image Handling, RGB Dimensions, and Resizing</h2>
+    <p>We've optimized our image handling process to ensure faster data loading and improved model training speed, while
+        also managing the dimensions of RGB images and resizing for consistency:</p>
+    <ul>
+        <li><strong>Batch Processing:</strong> Rather than loading images individually, we use batch processing
+            techniques. This leverages parallelism and optimized data handling, resulting in quicker data loading.
+        </li>
+        <li><strong>Resizing for Consistency:</strong> All images are resized to a common size (e.g., 30x30) as part of
+            preprocessing. This guarantees consistent input dimensions for the model, enhancing its ability to recognize
+            traffic signs of varying sizes and orientations.
+        </li>
+        <li><strong>RGB Color Space:</strong> Images are typically represented in the Red-Green-Blue (RGB) color space,
+            where each pixel is described by three color channels. Our model processes these channels to capture color
+            information and patterns specific to traffic signs.
+        </li>
+        <li><strong>Dimension Handling:</strong> RGB images have height, width, and channel dimensions. We ensure that
+            our model's input layer accommodates these dimensions, allowing the network to effectively learn and extract
+            features from the RGB data.
+        </li>
+        <li><strong>Faster Training:</strong> Our optimized image handling approach, combined with RGB dimension
+            management and resizing, significantly accelerates the training process. This enables the model to learn
+            from the data more efficiently.
+        </li>
+    </ul>
+    <p>By employing these techniques and carefully managing the RGB dimensions along with resizing, we ensure that our
+        model is trained on a diverse and representative dataset while maintaining high training speeds.</p>
+
+    <h2>Step 3: Testing</h2>
+    <p>After training, we evaluate the model's performance on a separate test dataset. We calculate accuracy and loss
+        metrics to assess its generalization to new, unseen images.</p>
+
+    <h2>Step 4: Predicting with Trained Model</h2>
+    <p>Once our model is trained, we can predict traffic sign labels using the <code>predict_model</code> function:</p>
+    <ul>
+        <li><strong>Predict Model Function:</strong> The <code>predict_model</code> function uses a trained
+            Convolutional Neural Network (CNN) to predict the class label of a traffic sign image. It loads a
+            pre-trained model that has learned to recognize various traffic signs.
+        </li>
+        <li><strong>Handling Images with Alpha Channel:</strong> Some images may have an additional fourth dimension,
+            called the alpha channel, which represents transparency. We preprocess images to ensure they have three RGB
+            channels, discarding the alpha channel if present.
+        </li>
+        <li><strong>Resizing Images:</strong> Images are resized to a common size (e.g., 30x30) before prediction. This
+            resizing step ensures uniform input dimensions for the model, facilitating accurate predictions.
+        </li>
+        <li><strong>Loading Pretrained Model:</strong> The <code>predict_model</code> function loads a pretrained model
+            that has been fine-tuned to recognize traffic signs. This model has learned to extract features and patterns
+            from the training data to make accurate predictions.
+        </li>
+    </ul>
+    <p>By utilizing the <code>predict_model</code> function and handling various image dimensions, we can confidently
+        predict the class of a given traffic sign image.</p>
+
+    <!-- Display accuracy.png -->
+    <img src="{{ url_for('static', filename='images/accuracy.png') }}" alt="Accuracy Graph" width="600" height="400">
+
+    <!-- Display loss.png -->
+    <img src="{{ url_for('static', filename='images/loss.png') }}" alt="Loss Graph" width="600" height="400">
+
+    <h2>Experience the Power of AI!</h2>
+    <p>Our traffic sign recognition model combines the strength of deep learning and image analysis to provide accurate
+        predictions. Try it out for yourself and experience the capabilities of AI in action!</p>
+
+
+</div>
+
+{% endblock content %}
